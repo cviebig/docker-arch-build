@@ -7,13 +7,12 @@ RUN pacman -S --noprogressbar --noconfirm --needed base-devel boost llvm clang c
 #
 # Build dependencies
 #
-RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest intel-tbb libxslt readline mercurial sparsehash texlive-core numactl openmp && \
+RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest intel-tbb libxslt readline mercurial sparsehash texlive-core numactl openmp rapidjson && \
     pacman -Scc --noconfirm && \
     mkdir -v -p /var/abs/local && \
     cd /var/abs/local && \
     git clone https://aur.archlinux.org/htslib.git && \
     git clone https://aur.archlinux.org/alglib.git && \
-    git clone https://aur.archlinux.org/rapidjson-git.git && \
     git clone https://github.com/cviebig/archlinux-aur-samtools.git && \
     git clone https://github.com/cviebig/arch-aur-boost-compute.git boost-compute && \
     useradd -ms /bin/bash build || true && \
@@ -23,8 +22,6 @@ RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest inte
     pacman -U --noconfirm /var/abs/local/htslib/htslib-*-x86_64.pkg.tar.xz && \
     su -c "cd /var/abs/local/alglib && makepkg" - build && \
     pacman -U --noconfirm /var/abs/local/alglib/alglib-*-x86_64.pkg.tar.xz && \
-    su -c "cd /var/abs/local/rapidjson-git && makepkg" - build && \
-    pacman -U --noconfirm /var/abs/local/rapidjson-git/rapidjson-*-any.pkg.tar.xz && \
     su -c "cd /var/abs/local/archlinux-aur-samtools && makepkg" - build && \
     pacman -U --noconfirm /var/abs/local/archlinux-aur-samtools/samtools-*-x86_64.pkg.tar.xz && \
     su -c "cd /var/abs/local/boost-compute && makepkg" - build && \
