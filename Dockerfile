@@ -14,7 +14,6 @@ RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest inte
     git clone https://aur.archlinux.org/htslib.git && \
     git clone https://aur.archlinux.org/alglib.git && \
     git clone https://github.com/cviebig/archlinux-aur-samtools.git && \
-    git clone https://github.com/cviebig/arch-aur-boost-compute.git boost-compute && \
     useradd -ms /bin/bash build || true && \
     chown -R build:build /var/abs/local && \
     chmod -R 744 /var/abs/local && \
@@ -24,10 +23,6 @@ RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest inte
     pacman -U --noconfirm /var/abs/local/alglib/alglib-*-x86_64.pkg.tar.xz && \
     su -c "cd /var/abs/local/archlinux-aur-samtools && makepkg" - build && \
     pacman -U --noconfirm /var/abs/local/archlinux-aur-samtools/samtools-*-x86_64.pkg.tar.xz && \
-    su -c "cd /var/abs/local/boost-compute && makepkg" - build && \
-    pacman -U --noconfirm /var/abs/local/boost-compute/boost-compute-*.pkg.tar.xz && \
-    mkdir -v -p /usr/share/cmake/BoostCompute && \
-    echo "set(BoostCompute_INCLUDE_DIRS \"/usr/include/boost\")" > /usr/share/cmake/BoostCompute/BoostComputeConfig.cmake && \
     rm -rf /var/abs/local/* && \
     pacman -Scc --noconfirm && \
     rm -rf /usr/share/man/*
