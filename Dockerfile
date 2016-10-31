@@ -23,6 +23,8 @@ RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest inte
     pacman -U --noconfirm /var/abs/local/alglib/alglib-*-x86_64.pkg.tar.xz && \
     su -c "cd /var/abs/local/archlinux-aur-samtools && makepkg" - build && \
     pacman -U --noconfirm /var/abs/local/archlinux-aur-samtools/samtools-*-x86_64.pkg.tar.xz && \
+    mkdir -v -p /usr/share/cmake/BoostCompute && \
+    echo "set(BoostCompute_INCLUDE_DIRS \"/usr/include/boost\")" > /usr/share/cmake/BoostCompute/BoostComputeConfig.cmake && \
     rm -rf /var/abs/local/* && \
     pacman -Scc --noconfirm && \
     rm -rf /usr/share/man/*
