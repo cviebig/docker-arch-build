@@ -32,7 +32,7 @@ RUN pacman -S --noprogressbar --noconfirm --needed bison doxygen flex gtest inte
 #
 RUN pacman -S --noprogressbar --noconfirm help2man && \
     cd /var/abs/local && \
-    git clone https://github.com/cviebig/arch-aur-flex-git.git flex-git && \
+    git clone --branch version/2.6.2 https://github.com/cviebig/arch-aur-flex-git.git flex-git && \
     chown -R build:build /var/abs/local && \
     chmod -R 744 /var/abs/local && \
     su -c "cd /var/abs/local/flex-git && makepkg" - build && \
